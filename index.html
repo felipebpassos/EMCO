@@ -29,203 +29,308 @@
             sans: ['Montserrat', 'sans-serif']
           },
           colors: {
-            coal: '#090909',
-            bone: '#f2f0ec',
-            steel: '#666666',
-            line: '#d9d4ce',
-            alert: '#ff4d57',
-            alertDeep: '#d91f2d'
+            coal: '#050505',
+            panel: '#12121a',
+            panelSoft: '#1b1b26',
+            gold: '#E03A3A',
+            goldDeep: '#C52F2F',
+            mist: '#b7b9d3',
+            line: 'rgba(255,255,255,0.12)'
           },
           boxShadow: {
-            panel: '0 28px 80px rgba(0, 0, 0, 0.16)'
+            glow: '0 24px 60px rgba(224, 58, 58, 0.18)',
+            panel: '0 30px 80px rgba(0,0,0,0.35)'
           }
         }
       }
     };
   </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, rgba(224, 58, 58, 0.09), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(121, 124, 255, 0.08), transparent 26%),
+        #050505;
+    }
+
+    .noise::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 140px 140px;
+      mask-image: radial-gradient(circle at center, black, transparent 85%);
+      pointer-events: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px) scale(0.98);
+      transition:
+        opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .faq-item[open] summary svg {
+      transform: rotate(45deg);
+    }
+  </style>
   <script>
     console.log("Pixel loaded");
   </script>
 </head>
-<body class="bg-bone font-sans text-coal antialiased">
-  <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(255,77,87,0.12),_transparent_28%),linear-gradient(180deg,_#f6f4f1_0%,_#ece7e1_100%)]"></div>
-
-  <header class="fixed inset-x-0 top-0 z-50 border-b border-coal/10 bg-bone/90 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl justify-center px-6 py-4 lg:px-8">
-      <nav aria-label="Principal" class="hidden items-center justify-center gap-8 md:flex">
-        <a href="#benefits" class="text-sm font-semibold text-coal/72 transition hover:text-alertDeep">Benefícios</a>
-        <a href="#features" class="text-sm font-semibold text-coal/72 transition hover:text-alertDeep">Conteúdo</a>
-        <a href="#social-proof" class="text-sm font-semibold text-coal/72 transition hover:text-alertDeep">Autoridade</a>
-        <a href="#cta" class="text-sm font-semibold text-coal/72 transition hover:text-alertDeep">Inscrição</a>
+<body class="noise font-sans text-white antialiased">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-center px-6 py-4 lg:px-8">
+      <nav aria-label="Principal" class="hidden items-center gap-8 md:flex">
+        <a href="#sobre-1" class="text-sm font-semibold text-white/72 transition hover:text-gold">O curso</a>
+        <a href="#pricing" class="text-sm font-semibold text-white/72 transition hover:text-gold">Pricing</a>
+        <a href="#faq" class="text-sm font-semibold text-white/72 transition hover:text-gold">FAQ</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="hero" class="mx-auto max-w-7xl px-0 pt-0">
-      <div class="flex justify-center">
+    <section id="hero" class="w-full bg-[#EBEBEB] px-0 pt-0">
+      <div class="mx-auto flex max-w-7xl justify-center">
         <img src="/img/capa.png" alt="Capa do curso EMCO com Dr. Breno Barbosa" class="h-screen w-auto max-w-full object-contain">
       </div>
     </section>
 
-    <section id="benefits" class="border-y border-coal/10 bg-white/80 py-20">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <p class="text-sm font-bold uppercase tracking-[0.22em] text-alertDeep">Por que este curso importa</p>
-          <h2 class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-            Segurança clínica não pode depender de improviso.
+    <section id="sobre-1" class="px-6 py-24 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="reveal">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o curso</p>
+          <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
+            Curso completo para agir com segurança quando a emergência acontece.
           </h2>
-          <p class="mt-5 text-lg leading-8 text-coal/70">
-            A proposta da página é direta: mostrar ao profissional da odontologia que preparo técnico para emergência médica não é diferencial estético, é responsabilidade clínica.
+        </div>
+        <div class="reveal mt-12 overflow-hidden rounded-[2rem] border border-white/10 bg-panel shadow-panel" style="--reveal-delay: 120ms;">
+          <div class="relative aspect-video">
+            <img src="/img/capa.png" alt="Prévia visual da VSL do curso EMCO" class="h-full w-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-br from-black/10 via-black/45 to-black/70"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+              <button type="button" aria-label="Assistir VSL" class="mt-6 flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-gold text-black shadow-glow transition duration-300 hover:scale-105 hover:bg-goldDeep">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="ml-1 h-8 w-8">
+                  <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l10-6.86a1 1 0 0 0 0-1.72l-10-6.86A1 1 0 0 0 8 5.14Z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="reveal mt-20" style="--reveal-delay: 220ms;">
+          <a href="#pricing" class="inline-flex items-center justify-center rounded-full bg-gold px-12 py-4 text-base font-extrabold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-goldDeep hover:shadow-glow">
+            Quero fazer parte
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-2" class="bg-white px-6 py-24 lg:px-8">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div class="reveal grid gap-4 sm:grid-cols-2" style="--reveal-delay: 80ms;">
+          <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg sm:row-span-2">
+            <img src="/img/img1.jpeg" alt="Imagem do curso EMCO em destaque" class="h-full min-h-[22rem] w-full object-cover object-[56%_center] transition duration-700 hover:scale-105">
+          </figure>
+          <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg">
+            <img src="/img/img2.jpeg" alt="Recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[25%_center] transition duration-700 hover:scale-105">
+          </figure>
+          <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg">
+            <img src="/img/img3.jpeg" alt="Outro recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[78%_center] transition duration-700 hover:scale-105">
+          </figure>
+        </div>
+        <div class="reveal" style="--reveal-delay: 180ms;">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o curso</p>
+          <h2 class="mt-5 text-4xl font-black tracking-tight text-zinc-800 sm:text-5xl">
+            Conteúdo pensado para tirar a resposta clínica do improviso.
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-zinc-600">
+            O mural reforça a percepção visual do curso com uma composição mais editorial, enquanto o texto sustenta a proposta: preparar o profissional para reconhecer sinais de alerta, agir com mais clareza e conduzir situações críticas com critério.
+          </p>
+          <p class="mt-4 text-lg leading-8 text-zinc-500">
+            A seção foi simplificada para funcionar como prova visual da autoridade do material sem competir com a oferta principal.
           </p>
         </div>
-        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-            <h3 class="text-xl font-extrabold">Reconhecimento rápido</h3>
-            <p class="mt-3 text-sm leading-7 text-coal/72">Aprenda a identificar sinais de alerta e diferenciar quadros que exigem intervenção imediata.</p>
-          </article>
-          <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-            <h3 class="text-xl font-extrabold">Conduta com critério</h3>
-            <p class="mt-3 text-sm leading-7 text-coal/72">Entenda protocolos, sequência de ação e prioridades clínicas dentro da realidade do consultório.</p>
-          </article>
-          <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-            <h3 class="text-xl font-extrabold">Mais confiança profissional</h3>
-            <p class="mt-3 text-sm leading-7 text-coal/72">Reduza insegurança em situações críticas e tome decisões com mais clareza sob pressão.</p>
-          </article>
-          <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-            <h3 class="text-xl font-extrabold">Aplicação imediata</h3>
-            <p class="mt-3 text-sm leading-7 text-coal/72">Conteúdo pensado para o dia a dia do atendimento odontológico, sem excesso teórico desconectado da prática.</p>
-          </article>
-        </div>
       </div>
     </section>
 
-    <section id="features" class="py-20">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div class="rounded-[2rem] bg-coal p-8 text-white">
-            <p class="text-sm font-bold uppercase tracking-[0.22em] text-white/60">O que o aluno encontra</p>
-            <h2 class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-              Conteúdo estruturado para resposta clínica segura.
-            </h2>
-            <p class="mt-5 text-base leading-8 text-white/72">
-              Como você não definiu headline secundária nem lista real de módulos, mantive o conteúdo desta seção em base mock, mas já orientado à venda do curso.
+    <section id="criador" class="px-6 py-24 lg:px-8">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="reveal order-2 lg:order-1" style="--reveal-delay: 80ms;">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o criador do curso</p>
+          <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-4xl">
+            Dr. Breno Barbosa conduz a formação com posicionamento técnico e comunicação direta.
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-white/72">
+            Esta seção foi desenhada para apresentar o especialista de forma objetiva: título forte, contexto profissional e uma imagem com presença. A proposta é sustentar confiança sem transformar a página em biografia longa.
+          </p>
+        </div>
+        <figure class="reveal order-1 overflow-hidden rounded-[2.2rem] border border-white/10 bg-panel shadow-panel lg:order-2" style="--reveal-delay: 180ms;">
+          <img src="/img/breno.jpeg" alt="Dr. Breno Barbosa, criador do curso EMCO" class="h-full min-h-[28rem] w-full object-cover object-[62%_center]">
+        </figure>
+      </div>
+    </section>
+
+    <section id="pricing" class="px-6 py-24 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 text-center reveal">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Pricing</p>
+          <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
+            Oferta direta, benefícios claros e risco reduzido para entrar agora.
+          </h2>
+        </div>
+        <div class="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <article class="reveal rounded-[2rem] border border-white/10 bg-panel px-8 py-10 shadow-panel sm:px-10" style="--reveal-delay: 100ms;">
+            <h3 class="text-center text-3xl font-black leading-tight text-white">
+              Não perca<br>esta oportunidade!
+            </h3>
+            <ul class="mt-10 space-y-5">
+              <li class="flex items-center gap-4 text-xl font-semibold text-mist">
+                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                Grupo VIP exclusivo
+              </li>
+              <li class="flex items-center gap-4 text-xl font-semibold text-mist">
+                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                Aulas gravadas
+              </li>
+              <li class="flex items-center gap-4 text-xl font-semibold text-mist">
+                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                E mais 3 bônus incríveis
+              </li>
+            </ul>
+            <p class="mt-10 text-center text-xl font-bold text-white/82">
+              De <span class="line-through decoration-gold/80">R$ 197,00</span> por apenas
             </p>
-            <div class="mt-8 rounded-[1.5rem] border border-white/12 bg-white/5 p-6">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-white/55">Formato mock</p>
-              <p class="mt-3 text-2xl font-bold">Aulas objetivas, foco em decisão e aplicabilidade imediata.</p>
-            </div>
-          </div>
-          <div class="grid gap-6 sm:grid-cols-2">
-            <article class="rounded-[1.75rem] border border-coal/10 bg-white p-7 shadow-panel">
-              <h3 class="text-lg font-extrabold">Avaliação inicial do paciente</h3>
-              <p class="mt-3 text-sm leading-7 text-coal/72">Base para reconhecer alterações relevantes antes, durante e após o atendimento.</p>
-            </article>
-            <article class="rounded-[1.75rem] border border-coal/10 bg-white p-7 shadow-panel">
-              <h3 class="text-lg font-extrabold">Principais intercorrências</h3>
-              <p class="mt-3 text-sm leading-7 text-coal/72">Panorama mock de eventos agudos que exigem resposta rápida no consultório.</p>
-            </article>
-            <article class="rounded-[1.75rem] border border-coal/10 bg-white p-7 shadow-panel">
-              <h3 class="text-lg font-extrabold">Fluxo de atendimento</h3>
-              <p class="mt-3 text-sm leading-7 text-coal/72">Organização de conduta, priorização e encaminhamento quando necessário.</p>
-            </article>
-            <article class="rounded-[1.75rem] border border-coal/10 bg-white p-7 shadow-panel">
-              <h3 class="text-lg font-extrabold">Postura e prevenção</h3>
-              <p class="mt-3 text-sm leading-7 text-coal/72">Preparação do consultório e fortalecimento de rotina clínica mais segura.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="social-proof" class="border-y border-coal/10 bg-white/85 py-20">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <article class="rounded-[2rem] bg-[linear-gradient(135deg,_#111111_0%,_#2b2b2b_100%)] p-8 text-white shadow-panel">
-            <p class="text-sm font-bold uppercase tracking-[0.22em] text-white/55">Autoridade</p>
-            <h2 class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-              A imagem do curso sustenta uma presença forte, técnica e formal.
-            </h2>
-            <p class="mt-5 max-w-2xl text-base leading-8 text-white/72">
-              A capa posiciona o curso com sobriedade e contraste alto. Usei essa direção visual como base da página para manter coerência entre anúncio, capa e venda.
+            <p class="mt-4 text-center text-6xl font-black tracking-tight text-white sm:text-7xl">
+              R$ 67,00
             </p>
-            <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="rounded-[1.25rem] border border-white/10 bg-white/5 p-5">
-                <p class="text-3xl font-black">Formal</p>
-                <p class="mt-2 text-sm text-white/68">Tipografia pesada, contraste e composição limpa.</p>
-              </div>
-              <div class="rounded-[1.25rem] border border-white/10 bg-white/5 p-5">
-                <p class="text-3xl font-black">Moderno</p>
-                <p class="mt-2 text-sm text-white/68">Espaço negativo, blocos amplos e destaque cirúrgico no vermelho.</p>
-              </div>
-              <div class="rounded-[1.25rem] border border-white/10 bg-white/5 p-5">
-                <p class="text-3xl font-black">Direto</p>
-                <p class="mt-2 text-sm text-white/68">Foco claro em conversão com checkout evidente.</p>
+            <div class="mt-10">
+              <a href="https://checkout.exemplo.com/emco" class="flex items-center justify-center rounded-2xl bg-gold px-6 py-5 text-center text-xl font-extrabold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-goldDeep hover:shadow-glow">
+                Quero fazer parte
+              </a>
+            </div>
+            <p class="mt-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-white/56">
+              7 dias grátis para testar
+            </p>
+            <img src="/img/methods.webp" alt="Métodos de pagamento disponíveis" class="mx-auto mt-10 h-auto w-full max-w-[16rem] object-contain opacity-90">
+          </article>
+
+          <article class="reveal rounded-[2rem] border border-white/10 bg-white/[0.03] px-8 py-10 sm:px-10" style="--reveal-delay: 220ms;">
+            <div class="flex flex-col items-center text-center">
+              <img src="/img/7d.png" alt="Garantia de 7 dias" class="mb-6 h-36 w-36 object-contain grayscale">
+              <div>
+                <h3 class="text-4xl font-black leading-tight text-mist sm:text-3xl">
+                  Você tem 7 dias para testar o conteúdo da EMCO.
+                </h3>
+                <p class="mt-6 max-w-xl text-base leading-7 text-white/82 sm:text-lg sm:leading-8">
+                  Se durante esse período você não estiver satisfeito com o conteúdo, devolvemos 100% do seu investimento, basta nos avisar por email dentro desse prazo.
+                </p>
               </div>
             </div>
           </article>
-          <div class="grid gap-6">
-            <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-steel">Posicionamento</p>
-              <h3 class="mt-3 text-2xl font-black">Curso voltado à prática clínica no consultório odontológico.</h3>
-            </article>
-            <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-steel">Venda</p>
-              <h3 class="mt-3 text-2xl font-black">CTA principal apontando direto para o checkout.</h3>
-            </article>
-            <article class="rounded-[1.75rem] border border-line bg-bone p-7">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-steel">Observação</p>
-              <h3 class="mt-3 text-2xl font-black">Depoimentos e provas reais ainda podem substituir os mocks desta versão.</h3>
-            </article>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="cta" class="py-20">
-      <div class="mx-auto max-w-5xl px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[2rem] border border-coal/10 bg-white shadow-panel">
-          <div class="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-            <div class="px-8 py-10 sm:px-12 sm:py-12">
-              <p class="text-sm font-bold uppercase tracking-[0.22em] text-alertDeep">Inscrição</p>
-              <h2 class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-                Entre para o EMCO e prepare-se para responder com segurança.
-              </h2>
-              <p class="mt-5 max-w-2xl text-base leading-8 text-coal/72">
-                Como você não enviou o texto final de CTA e nem o link real do checkout, usei um botão com destino mock que pode ser trocado em segundos.
-              </p>
-              <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-                <a href="https://checkout.exemplo.com/emco" class="inline-flex items-center justify-center rounded-full bg-alert px-7 py-4 text-base font-extrabold text-white transition hover:bg-alertDeep">
-                  Quero acessar o checkout
-                </a>
-                <a href="#hero" class="inline-flex items-center justify-center rounded-full border border-coal/12 px-7 py-4 text-base font-bold text-coal transition hover:border-alert hover:text-alertDeep">
-                  Revisar apresentação
-                </a>
-              </div>
-            </div>
-            <div class="bg-[linear-gradient(180deg,_#171717_0%,_#0b0b0b_100%)] px-8 py-10 text-white sm:px-12 sm:py-12">
-              <p class="text-sm font-bold uppercase tracking-[0.22em] text-white/55">Resumo</p>
-              <ul class="mt-6 space-y-4 text-sm leading-7 text-white/78">
-                <li>Curso com foco em emergências médicas no contexto odontológico.</li>
-                <li>Visual alinhado à capa enviada, com formalidade e contraste forte.</li>
-                <li>Estrutura preparada para conversão com navegação curta e CTA de compra.</li>
-              </ul>
-            </div>
-          </div>
+    <section id="faq" class="px-6 py-24 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-center reveal">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Perguntas frequentes</p>
+          <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
+            O essencial para reduzir objeção antes do checkout.
+          </h2>
+        </div>
+        <div class="mt-12 space-y-4">
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 60ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              O acesso ao curso é imediato?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              Sim. Após a confirmação do pagamento, o aluno recebe o acesso conforme as regras da plataforma de hospedagem do curso.
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 120ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              As aulas ficam gravadas?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              Sim. A estrutura desta oferta já comunica aulas gravadas para facilitar consumo no tempo do aluno.
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 180ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              Como funciona a garantia de 7 dias?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              Dentro de 7 dias após a compra, o aluno pode solicitar o reembolso integral se o conteúdo não atender à expectativa.
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 240ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              Para quem este curso foi pensado?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              A comunicação da página está orientada ao cirurgião-dentista que deseja mais preparo para lidar com emergências médicas no consultório.
+            </p>
+          </details>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-coal/10 bg-bone">
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-coal/65 md:flex-row md:items-center md:justify-between lg:px-8">
+  <footer class="border-t border-white/10 px-6 py-10 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/58 md:flex-row md:items-center md:justify-between">
       <p>&copy; 2026 EMCO | Emergências Médicas em Consultório Odontológico</p>
       <div class="flex flex-wrap items-center gap-5">
-        <a href="#benefits" class="transition hover:text-alertDeep">Benefícios</a>
-        <a href="#features" class="transition hover:text-alertDeep">Conteúdo</a>
-        <a href="https://checkout.exemplo.com/emco" class="transition hover:text-alertDeep">Checkout</a>
+        <a href="#sobre-1" class="transition hover:text-gold">Curso</a>
+        <a href="#pricing" class="transition hover:text-gold">Pricing</a>
+        <a href="#faq" class="transition hover:text-gold">FAQ</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
