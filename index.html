@@ -7,16 +7,16 @@
   <meta name="description" content="Página de vendas do curso EMCO. Aprenda protocolos, condutas e tomada de decisão para agir com segurança diante de emergências médicas no consultório odontológico.">
   <meta name="keywords" content="EMCO, emergências médicas, consultório odontológico, curso odontologia, urgência odontológica, Dr. Breno Barbosa">
   <link rel="canonical" href="https://emco.local/">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="./img/favicon.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="EMCO | Emergências Médicas em Consultório Odontológico">
   <meta property="og:description" content="Curso voltado ao cirurgião-dentista que precisa reconhecer riscos, responder com rapidez e conduzir emergências com critério clínico.">
   <meta property="og:url" content="https://emco.local/">
-  <meta property="og:image" content="/img/capa.png">
+  <meta property="og:image" content="./img/capa.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="EMCO | Emergências Médicas em Consultório Odontológico">
   <meta name="twitter:description" content="Formação para conduta segura em emergências médicas no consultório odontológico.">
-  <meta name="twitter:image" content="/img/capa.png">
+  <meta name="twitter:image" content="./img/capa.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -34,11 +34,14 @@
             panelSoft: '#1b1b26',
             gold: '#E03A3A',
             goldDeep: '#C52F2F',
+            cta: '#F2C94C',
+            ctaDeep: '#D4A91F',
             mist: '#b7b9d3',
             line: 'rgba(255,255,255,0.12)'
           },
           boxShadow: {
             glow: '0 24px 60px rgba(224, 58, 58, 0.18)',
+            ctaGlow: '0 18px 44px rgba(242, 201, 76, 0.38)',
             panel: '0 30px 80px rgba(0,0,0,0.35)'
           }
         }
@@ -88,43 +91,218 @@
     .faq-item[open] summary svg {
       transform: rotate(45deg);
     }
+
+    .hero-float-cta {
+      opacity: 0;
+      transform: translateY(32px);
+      animation: hero-float-in 720ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: var(--hero-cta-delay, 180ms);
+    }
+
+    .hero-top-only {
+      transition: opacity 180ms ease, visibility 180ms ease;
+    }
+
+    .hero-top-only.is-hidden {
+      opacity: 0 !important;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .site-header {
+      transform: translateY(0);
+      transition:
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 280ms ease,
+        border-color 280ms ease;
+      will-change: transform;
+    }
+
+    .site-header.is-hidden {
+      transform: translateY(calc(-100% - 1px));
+    }
+
+    .hero-edge-cta-left {
+      left: calc(24px - ((100vw - 100%) / 2));
+    }
+
+    .hero-edge-cta-right {
+      right: calc(24px - ((100vw - 100%) / 2));
+    }
+
+    .hero-fixed-cta {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      border-radius: 0;
+      padding: 1rem 1.5rem;
+    }
+
+    .hero-fixed-cta.is-hidden {
+      opacity: 0 !important;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-fixed-cta {
+        left: auto;
+        right: calc(24px - ((100vw - 100%) / 2));
+        bottom: 2.5rem;
+        width: auto;
+        border-radius: 9999px;
+        padding: 1rem 4rem;
+      }
+    }
+
+    .cta-primary {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f8d86f 0%, #f2c94c 58%, #dfb32a 100%);
+      box-shadow:
+        0 18px 44px rgba(242, 201, 76, 0.32),
+        inset 0 1px 0 rgba(255,255,255,0.32);
+      isolation: isolate;
+    }
+
+    .cta-primary::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      bottom: -20%;
+      left: -38%;
+      width: 32%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 20%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.18) 80%, rgba(255,255,255,0) 100%);
+      transform: skewX(-24deg);
+      animation: cta-sheen 2.9s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .cta-primary > span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-primary:hover {
+      background: linear-gradient(180deg, #f9df84 0%, #f4cf58 58%, #e2b72f 100%);
+    }
+
+    @keyframes cta-sheen {
+      0%,
+      12% {
+        left: -38%;
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      58% {
+        left: 112%;
+        opacity: 0.95;
+      }
+
+      100% {
+        left: 112%;
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-primary::after {
+        animation: none;
+      }
+    }
+
+    .card-title {
+      max-width: 11ch;
+      text-wrap: balance;
+    }
+
+    .card-title-strong {
+      display: block;
+      margin-top: 0.3rem;
+      max-width: 9ch;
+      line-height: 0.95;
+    }
+
+    .card-title > span {
+      display: block;
+      margin-top: 0.3rem;
+      max-width: 9ch;
+      line-height: 0.95;
+    }
+
+    @keyframes hero-float-in {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
   <script>
     console.log("Pixel loaded");
   </script>
 </head>
 <body class="noise font-sans text-white antialiased">
-  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-center px-6 py-4 lg:px-8">
-      <nav aria-label="Principal" class="hidden items-center gap-8 md:flex">
-        <a href="#sobre-1" class="text-sm font-semibold text-white/72 transition hover:text-gold">O curso</a>
-        <a href="#pricing" class="text-sm font-semibold text-white/72 transition hover:text-gold">Pricing</a>
-        <a href="#faq" class="text-sm font-semibold text-white/72 transition hover:text-gold">FAQ</a>
+  <header id="site-header" class="site-header fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 sm:px-6 lg:px-8">
+      <nav aria-label="Principal" class="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:w-auto sm:gap-6 md:gap-8">
+        <a href="#sobre-1" class="text-xs font-semibold text-white/72 transition hover:text-gold sm:text-sm">O curso</a>
+        <a href="#pricing" class="text-xs font-semibold text-white/72 transition hover:text-gold sm:text-sm">Inscreva-se</a>
+        <a href="#faq" class="text-xs font-semibold text-white/72 transition hover:text-gold sm:text-sm">FAQ</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="hero" class="w-full bg-[#EBEBEB] px-0 pt-0">
-      <div class="mx-auto flex max-w-7xl justify-center">
-        <img src="/img/capa.png" alt="Capa do curso EMCO com Dr. Breno Barbosa" class="h-screen w-auto max-w-full object-contain">
+    <section id="hero" class="w-full bg-[#EBEBEB] px-4 pt-0 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="relative flex justify-center">
+          <img src="./img/capa.png" alt="Capa do curso EMCO com Dr. Breno Barbosa" class="h-screen w-auto max-w-full object-contain">
+
+          <a id="hero-more-button" href="#sobre-1" class="hero-float-cta hero-top-only hero-edge-cta-left absolute bottom-10 hidden items-center justify-center gap-3 rounded-full bg-coal px-16 py-4 text-base font-extrabold text-white shadow-panel transition duration-300 hover:-translate-y-0.5 hover:bg-black lg:inline-flex" style="--hero-cta-delay: 140ms;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+              <path d="M12 5v14"></path>
+              <path d="m6 13 6 6 6-6"></path>
+            </svg>
+            <span>Saiba mais</span>
+          </a>
+
+          <a id="hero-fixed-button" href="#pricing" class="hero-float-cta hero-fixed-cta cta-primary fixed z-50 flex items-center justify-center text-base font-extrabold text-black transition duration-300 hover:-translate-y-0.5" style="--hero-cta-delay: 260ms;">
+            <span>Quero fazer parte</span>
+          </a>
+        </div>
       </div>
     </section>
 
     <section id="sobre-1" class="px-6 py-24 lg:px-8">
-      <div class="mx-auto max-w-4xl text-center">
+      <div class="mx-auto max-w-3xl text-center">
         <div class="reveal">
           <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o curso</p>
           <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
-            Curso completo para agir com segurança quando a emergência acontece.
+            Você sabia que muitas vezes o dentista precisa agir rápido em emergências para salvar vidas?
           </h2>
+          <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/72 sm:text-xl">
+             Para estar preparado, faça parte do EMCO – Curso de Emergências Médicas em Consultório Odontológico. Curso pensado para capacitar dentistas a enfrentar com segurança emergências no consultório.
+          </p>
         </div>
         <div class="reveal mt-12 overflow-hidden rounded-[2rem] border border-white/10 bg-panel shadow-panel" style="--reveal-delay: 120ms;">
-          <div class="relative aspect-video">
-            <img src="/img/capa.png" alt="Prévia visual da VSL do curso EMCO" class="h-full w-full object-cover opacity-60">
+          <div id="vsl-player" class="relative aspect-video bg-black">
+            <img src="./img/capa.png" alt="Pr�via visual da VSL do curso EMCO" class="h-full w-full object-cover opacity-60">
             <div class="absolute inset-0 bg-gradient-to-br from-black/10 via-black/45 to-black/70"></div>
             <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-              <button type="button" aria-label="Assistir VSL" class="mt-6 flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-gold text-black shadow-glow transition duration-300 hover:scale-105 hover:bg-goldDeep">
+              <button id="vsl-play-button" type="button" aria-label="Assistir VSL" class="mt-6 flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-gold text-black shadow-glow transition duration-300 hover:scale-105 hover:bg-goldDeep">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="ml-1 h-8 w-8">
                   <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l10-6.86a1 1 0 0 0 0-1.72l-10-6.86A1 1 0 0 0 8 5.14Z"></path>
                 </svg>
@@ -132,10 +310,73 @@
             </div>
           </div>
         </div>
-        <div class="reveal mt-20" style="--reveal-delay: 220ms;">
-          <a href="#pricing" class="inline-flex items-center justify-center rounded-full bg-gold px-12 py-4 text-base font-extrabold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-goldDeep hover:shadow-glow">
-            Quero fazer parte
+      </div>
+      <div class="mx-auto mt-16 flex max-w-6xl justify-center">
+        <div class="reveal" style="--reveal-delay: 220ms;">
+          <a href="#pricing" class="cta-primary inline-flex items-center justify-center rounded-full px-12 py-4 text-base font-extrabold text-black transition duration-300 hover:-translate-y-0.5">
+            <span>Quero fazer parte</span>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="para-quem" class="px-6 py-24 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mx-auto max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-white">Para quem é o EMCO</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-3">
+          <article class="reveal group relative overflow-hidden rounded-[2rem] border border-white/10 bg-panel shadow-panel" style="--reveal-delay: 80ms;">
+            <div class="absolute left-6 top-5 z-20 h-1 w-20 rounded-full bg-gold"></div>
+            <div class="relative min-h-[34rem]">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=80" alt="Profissional da saúde analisando um caso clí­nico" class="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15"></div>
+              <div class="absolute inset-x-0 bottom-0 p-8 text-white">
+                <h3 class="card-title text-[1.9rem] font-light leading-[1.02] sm:text-[2.15rem]">
+                  Dentistas que querem mais
+                  <span class="block font-black">segurança de resposta</span>
+                </h3>
+                <p class="mt-5 text-base leading-7 text-white/78">
+                  Para quem atende rotina clí­nica e quer reconhecer sinais de risco com mais rapidez, reduzindo improviso nos momentos de maior pressão.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal group relative overflow-hidden rounded-[2rem] border border-white/10 bg-panel shadow-panel" style="--reveal-delay: 160ms;">
+            <div class="absolute left-6 top-5 z-20 h-1 w-20 rounded-full bg-gold"></div>
+            <div class="relative min-h-[34rem]">
+              <img src="./img/consultorio.jpeg" alt="Equipe em ambiente clí­nico durante alinhamento profissional" class="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15"></div>
+              <div class="absolute inset-x-0 bottom-0 p-8 text-white">
+                <h3 class="card-title text-[1.9rem] font-light leading-[1.02] sm:text-[2.15rem]">
+                  Profissionais em fase de
+                  <span class="block font-black">estruturação clí­nica</span>
+                </h3>
+                <p class="mt-5 text-base leading-7 text-white/78">
+                  Ideal para quem está consolidando protocolos, organizando condutas e quer construir uma atuação mais madura dentro do consultório.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal group relative overflow-hidden rounded-[2rem] border border-white/10 bg-panel shadow-panel" style="--reveal-delay: 240ms;">
+            <div class="absolute left-6 top-5 z-20 h-1 w-20 rounded-full bg-gold"></div>
+            <div class="relative min-h-[34rem]">
+              <img src="./img/emergencia.jpeg" alt="Profissional estudando protocolos e tomada de decisão em saúde" class="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15"></div>
+              <div class="absolute inset-x-0 bottom-0 p-8 text-white">
+                <h3 class="card-title text-[1.9rem] font-light leading-[1.02] sm:text-[2.15rem]">
+                  Quem busca unir teoria e
+                  <span class="block font-black">aplicação imediata</span>
+                </h3>
+                <p class="mt-5 text-base leading-7 text-white/78">
+                  Para o cirurgião-dentista que não quer só assistir conteúdo, mas transformar o conhecimento em decisão clí­nica mais firme e confiável.
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -144,43 +385,76 @@
       <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="reveal grid gap-4 sm:grid-cols-2" style="--reveal-delay: 80ms;">
           <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg sm:row-span-2">
-            <img src="/img/img1.jpeg" alt="Imagem do curso EMCO em destaque" class="h-full min-h-[22rem] w-full object-cover object-[56%_center] transition duration-700 hover:scale-105">
+            <img src="./img/img1.jpeg" alt="Imagem do curso EMCO em destaque" class="h-full min-h-[22rem] w-full object-cover object-[56%_center] transition duration-700 hover:scale-105">
           </figure>
           <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg">
-            <img src="/img/img2.jpeg" alt="Recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[25%_center] transition duration-700 hover:scale-105">
+            <img src="./img/img2.jpeg" alt="Recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[25%_center] transition duration-700 hover:scale-105">
           </figure>
           <figure class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-lg">
-            <img src="/img/img3.jpeg" alt="Outro recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[78%_center] transition duration-700 hover:scale-105">
+            <img src="./img/img3.jpeg" alt="Outro recorte visual do curso EMCO" class="h-full min-h-[10.5rem] w-full object-cover object-[78%_center] transition duration-700 hover:scale-105">
           </figure>
         </div>
         <div class="reveal" style="--reveal-delay: 180ms;">
           <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o curso</p>
           <h2 class="mt-5 text-4xl font-black tracking-tight text-zinc-800 sm:text-5xl">
-            Conteúdo pensado para tirar a resposta clínica do improviso.
+            Conteúdo objetivo para você saber exatamente como agir.
           </h2>
           <p class="mt-6 text-lg leading-8 text-zinc-600">
-            O mural reforça a percepção visual do curso com uma composição mais editorial, enquanto o texto sustenta a proposta: preparar o profissional para reconhecer sinais de alerta, agir com mais clareza e conduzir situações críticas com critério.
+            EMCO - Curso de Emergências Médicas em Consultório Odontológico, com foco exclusivo nas diversas situações de emergência que podem ocorrer durante seu atendimento no consultório. Informações objetivas e atualizadas para o cirurgião-dentista saber exatamente como agir nas intercorrências.
           </p>
-          <p class="mt-4 text-lg leading-8 text-zinc-500">
-            A seção foi simplificada para funcionar como prova visual da autoridade do material sem competir com a oferta principal.
+          <p class="mt-4 text-lg font-semibold leading-8 text-zinc-700">
+            Porque cada segundo é importante e você PRECISA ESTAR PREPARADO!!
           </p>
+          
         </div>
+        <div class="mt-8 w-full rounded-[1.75rem] bg-zinc-50 p-6 shadow-lg ring-1 ring-zinc-200 lg:col-span-2 lg:p-8">
+            <p class="text-sm font-bold uppercase tracking-[0.22em] text-gold/90">Principais abordagens</p>
+            <div class="mt-4 grid gap-6 text-lg leading-7 text-zinc-700 lg:grid-cols-2 lg:gap-10">
+              <ul class="space-y-4">
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-xl text-gold" aria-hidden="true">✓</span>
+                  <span>Suporte básico de vida em adulto e criança;</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-xl text-gold" aria-hidden="true">✓</span>
+                  <span>Suporte ideal no consultório;</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-xl text-gold" aria-hidden="true">✓</span>
+                  <span>Emergências como síncope, reação anafilática, angina, parada cardiorrespiratória, etc;</span>
+                </li>
+              </ul>
+              <ul class="space-y-4">
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-xl text-gold" aria-hidden="true">✓</span>
+                  <span>Desobstrução de via aérea;</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-xl text-gold" aria-hidden="true">✓</span>
+                  <span>Práticas simuladas de ressuscitação cardiopulmonar (RCP)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
       </div>
     </section>
 
     <section id="criador" class="px-6 py-24 lg:px-8">
       <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div class="reveal order-2 lg:order-1" style="--reveal-delay: 80ms;">
-          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o criador do curso</p>
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Sobre o criador do EMCO</p>
           <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-4xl">
             Dr. Breno Barbosa conduz a formação com posicionamento técnico e comunicação direta.
           </h2>
           <p class="mt-6 text-lg leading-8 text-white/72">
-            Esta seção foi desenhada para apresentar o especialista de forma objetiva: título forte, contexto profissional e uma imagem com presença. A proposta é sustentar confiança sem transformar a página em biografia longa.
+            Graduado em Odontologia pela Universidade Tiradentes (2007), especialista em Cirurgia Buco-Maxilo-Facial pela Universidade Federal da Bahia (UFBA - 2011), Mestre e Doutorando em Odontologia pela Universidade Federal de Sergipe (UFS). 
+          </p>
+          <p class="mt-6 text-lg leading-8 text-white/72">
+            Desde a residência, atuou e colaborou com as equipes médicas em inúmeras paradas cardiorrespiratórias, foi quando despertou maior interesse em se aprimorar e em 2014, realizou o 1° curso em Basic Life Supoort/RCP Pro - American Safety & Health Institute. Em seguida, percebendo uma deficiência dessa temática na Odontologia, iniciou ministrando os conteúdos de emergências médicas na graduação, foi ganhando destaque e sendo convidado para ministrar palestras, aulas em diversos cursos de  especializações e por último, em 2025 resolveu criar o próprio curso, EMCO - Emergências Médicas em Consultório Odontológico, de maneira presencial na própria clínica, visando capacitar os cirurgiões-dentistas a saber conduzir frente as diversas emergências que podem ocorrer num consultório odontológico.
           </p>
         </div>
         <figure class="reveal order-1 overflow-hidden rounded-[2.2rem] border border-white/10 bg-panel shadow-panel lg:order-2" style="--reveal-delay: 180ms;">
-          <img src="/img/breno.jpeg" alt="Dr. Breno Barbosa, criador do curso EMCO" class="h-full min-h-[28rem] w-full object-cover object-[62%_center]">
+          <img src="./img/breno.jpeg" alt="Dr. Breno Barbosa, criador do curso EMCO" class="h-full min-h-[28rem] w-full object-cover object-[62%_center]">
         </figure>
       </div>
     </section>
@@ -188,50 +462,50 @@
     <section id="pricing" class="px-6 py-24 lg:px-8">
       <div class="mx-auto max-w-6xl">
         <div class="mb-12 text-center reveal">
-          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Pricing</p>
+          <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Oferta limitada</p>
           <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
-            Oferta direta, benefícios claros e risco reduzido para entrar agora.
+            Venha fazer parte da EMCO
           </h2>
         </div>
-        <div class="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-          <article class="reveal rounded-[2rem] border border-white/10 bg-panel px-8 py-10 shadow-panel sm:px-10" style="--reveal-delay: 100ms;">
+        <div class="items-center gap-10">
+          <article class="reveal mx-auto w-full max-w-3xl rounded-[2rem] border border-white/10 bg-panel px-8 py-10 shadow-panel sm:px-10" style="--reveal-delay: 100ms;">
             <h3 class="text-center text-3xl font-black leading-tight text-white">
-              Não perca<br>esta oportunidade!
+              Garanta já essa oportunidade!
             </h3>
-            <ul class="mt-10 space-y-5">
+            <!-- <ul class="mx-auto mt-10 max-w-xs space-y-5">
               <li class="flex items-center gap-4 text-xl font-semibold text-mist">
-                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                <img src="./img/check.png" alt="" class="h-6 w-6 object-contain">
                 Grupo VIP exclusivo
               </li>
               <li class="flex items-center gap-4 text-xl font-semibold text-mist">
-                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                <img src="./img/check.png" alt="" class="h-6 w-6 object-contain">
                 Aulas gravadas
               </li>
               <li class="flex items-center gap-4 text-xl font-semibold text-mist">
-                <img src="/img/check.png" alt="" class="h-6 w-6 object-contain">
+                <img src="./img/check.png" alt="" class="h-6 w-6 object-contain">
                 E mais 3 bônus incríveis
               </li>
-            </ul>
+            </ul> -->
             <p class="mt-10 text-center text-xl font-bold text-white/82">
-              De <span class="line-through decoration-gold/80">R$ 197,00</span> por apenas
+              De <span class="line-through decoration-gold/80">R$ 500,00</span> por apenas
             </p>
             <p class="mt-4 text-center text-6xl font-black tracking-tight text-white sm:text-7xl">
-              R$ 67,00
+              R$ 397,00
             </p>
-            <div class="mt-10">
-              <a href="https://checkout.exemplo.com/emco" class="flex items-center justify-center rounded-2xl bg-gold px-6 py-5 text-center text-xl font-extrabold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-goldDeep hover:shadow-glow">
-                Quero fazer parte
+            <div class="mx-auto mt-10 max-w-md">
+              <a id="pricing-main-button" href="https://checkout.exemplo.com/emco" class="cta-primary flex items-center justify-center rounded-2xl px-6 py-5 text-center text-xl font-extrabold text-black transition duration-300 hover:-translate-y-0.5">
+                <span>Quero fazer parte</span>
               </a>
             </div>
-            <p class="mt-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-white/56">
+            <!-- <p class="mt-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-white/56">
               7 dias grátis para testar
-            </p>
-            <img src="/img/methods.webp" alt="Métodos de pagamento disponíveis" class="mx-auto mt-10 h-auto w-full max-w-[16rem] object-contain opacity-90">
+            </p> -->
+            <img src="./img/methods.webp" alt="Métodos de pagamento disponíveis" class="mx-auto mt-10 h-auto w-full max-w-[16rem] object-contain opacity-90">
           </article>
 
-          <article class="reveal rounded-[2rem] border border-white/10 bg-white/[0.03] px-8 py-10 sm:px-10" style="--reveal-delay: 220ms;">
+          <!-- <article class="reveal rounded-[2rem] border border-white/10 bg-white/[0.03] px-8 py-10 sm:px-10" style="--reveal-delay: 220ms;">
             <div class="flex flex-col items-center text-center">
-              <img src="/img/7d.png" alt="Garantia de 7 dias" class="mb-6 h-36 w-36 object-contain grayscale">
+              <img src="./img/7d.png" alt="Garantia de 7 dias" class="mb-6 h-36 w-36 object-contain grayscale">
               <div>
                 <h3 class="text-4xl font-black leading-tight text-mist sm:text-3xl">
                   Você tem 7 dias para testar o conteúdo da EMCO.
@@ -241,7 +515,7 @@
                 </p>
               </div>
             </div>
-          </article>
+          </article> -->
         </div>
       </div>
     </section>
@@ -251,41 +525,19 @@
         <div class="text-center reveal">
           <p class="text-sm font-bold uppercase tracking-[0.32em] text-gold/80">Perguntas frequentes</p>
           <h2 class="mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
-            O essencial para reduzir objeção antes do checkout.
+            Ficou alguma dúvida?
           </h2>
         </div>
         <div class="mt-12 space-y-4">
-          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 60ms;">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
-              O acesso ao curso é imediato?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
-                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-base leading-8 text-white/70">
-              Sim. Após a confirmação do pagamento, o aluno recebe o acesso conforme as regras da plataforma de hospedagem do curso.
-            </p>
-          </details>
-          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 120ms;">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
-              As aulas ficam gravadas?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
-                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-base leading-8 text-white/70">
-              Sim. A estrutura desta oferta já comunica aulas gravadas para facilitar consumo no tempo do aluno.
-            </p>
-          </details>
           <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 180ms;">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
-              Como funciona a garantia de 7 dias?
+              Dentista precisa saber sobre suporte básico de vida?
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
                 <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
               </svg>
             </summary>
             <p class="mt-4 text-base leading-8 text-white/70">
-              Dentro de 7 dias após a compra, o aluno pode solicitar o reembolso integral se o conteúdo não atender à expectativa.
+              Sim, de acordo com a Lei 5.081, artigo 6° e inciso VIII, “compete ao cirurgião-dentista prescrever e administrar medicação de urgência no caso de acidentes graves que comprometam a vida e a saúde do paciente”. Ou seja, a própria lei que rege a Odontologia determina que o cirurgião-dentista realize pronto-atendimento e o suporte básico de vida com objetivo de salvar a vida do paciente diante de um quadro grave de emergência num consultório odontológico. 
             </p>
           </details>
           <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 240ms;">
@@ -296,7 +548,51 @@
               </svg>
             </summary>
             <p class="mt-4 text-base leading-8 text-white/70">
-              A comunicação da página está orientada ao cirurgião-dentista que deseja mais preparo para lidar com emergências médicas no consultório.
+              Esse curso foi idealizado por um cirurgião-dentista para toda classe odontológica, seja profissional atuante na área e também acadêmicos em odontologia. Com linguagem fácil e objetiva, o curso busca levar informações técnicas e atualizadas já com as novas diretrizes 2025 da American Heart Association, abordando as condutas diante de vários quadros de emergências médicas que podem ocorrer durante um atendimento. 
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 240ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              É possível ter emergências graves na odontologia?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              A odontologia lida com procedimentos a TODO MOMENTO e quando associado com uso de anestésicos locais, o risco de entrar numa emergência aumenta significativamente. A anestesia é o momento crítico da odontologia! Emergência não escolhe dia, hora e nem local para acontecer, portanto, esteja preparado para saber como agir!
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 240ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              O curso abrange gestores de clínicas odontológicas?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              O EMCO compartilha dentro do seu conteúdo, orientações valiosas sobre estruturar um consultório ou uma clínica odontológica, trazendo sugestões do que deve ter de equipamentos, medicamentos, etc que venham auxiliar o cirurgião-dentista e equipe, num momento de emergência. Logo, o curso vai contribuir com sua clínica para uma visão mais ampla e preparada em saber lidar com tais situações adversas!
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 60ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              O acesso ao curso é imediato?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              Sim. Após a confirmação do pagamento, o acesso é liberado conforme o processamento da plataforma de hospedagem do curso, para que o aluno possa começar os estudos o quanto antes.
+            </p>
+          </details>
+          <details class="faq-item reveal rounded-[1.5rem] border border-white/10 bg-panelSoft/70 p-6" style="--reveal-delay: 120ms;">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-white">
+              As aulas ficam gravadas?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-5 w-5 shrink-0 transition duration-300">
+                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-base leading-8 text-white/70">
+              Sim. As aulas ficam gravadas, o que permite assistir no seu ritmo, revisar os pontos mais importantes e retomar o conteúdo sempre que precisar.
             </p>
           </details>
         </div>
@@ -331,6 +627,122 @@
     document.querySelectorAll('.reveal').forEach((element) => {
       observer.observe(element);
     });
+
+    const heroMoreButton = document.querySelector('#hero-more-button');
+    const heroFixedButton = document.querySelector('#hero-fixed-button');
+    const pricingMainButton = document.querySelector('#pricing-main-button');
+    const vslPlayer = document.querySelector('#vsl-player');
+    const vslPlayButton = document.querySelector('#vsl-play-button');
+    const siteHeader = document.querySelector('#site-header');
+
+    if (siteHeader) {
+      let lastScrollY = window.scrollY;
+      const scrollTolerance = 10;
+
+      const syncHeaderVisibility = () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY <= 0) {
+          siteHeader.classList.remove('is-hidden');
+          lastScrollY = 0;
+          return;
+        }
+
+        const scrollDelta = currentScrollY - lastScrollY;
+
+        if (Math.abs(scrollDelta) < scrollTolerance) {
+          return;
+        }
+
+        siteHeader.classList.toggle('is-hidden', scrollDelta > 0);
+        lastScrollY = currentScrollY;
+      };
+
+      syncHeaderVisibility();
+      window.addEventListener('scroll', syncHeaderVisibility, { passive: true });
+    }
+
+    if (heroMoreButton) {
+      const syncHeroMoreButtonVisibility = () => {
+        heroMoreButton.classList.toggle('is-hidden', window.scrollY > 0);
+      };
+
+      syncHeroMoreButtonVisibility();
+      window.addEventListener('scroll', syncHeroMoreButtonVisibility, { passive: true });
+    }
+
+    if (heroFixedButton && pricingMainButton) {
+      const pricingButtonObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          heroFixedButton.classList.toggle('is-hidden', entry.isIntersecting);
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      pricingButtonObserver.observe(pricingMainButton);
+    }
+
+    if (vslPlayer && vslPlayButton) {
+      const requestVideoFullscreen = (videoElement) => {
+        if (!videoElement) {
+          return;
+        }
+
+        if (typeof videoElement.requestFullscreen === 'function') {
+          videoElement.requestFullscreen().catch(() => {
+            if (typeof vslPlayer.requestFullscreen === 'function') {
+              vslPlayer.requestFullscreen().catch(() => {
+                if (typeof videoElement.webkitEnterFullscreen === 'function') {
+                  videoElement.webkitEnterFullscreen();
+                }
+              });
+              return;
+            }
+
+            if (typeof vslPlayer.webkitRequestFullscreen === 'function') {
+              vslPlayer.webkitRequestFullscreen();
+              return;
+            }
+
+            if (typeof videoElement.webkitEnterFullscreen === 'function') {
+              videoElement.webkitEnterFullscreen();
+            }
+          });
+          return;
+        }
+
+        if (typeof videoElement.webkitRequestFullscreen === 'function') {
+          videoElement.webkitRequestFullscreen();
+          return;
+        }
+
+        if (typeof vslPlayer.webkitRequestFullscreen === 'function') {
+          vslPlayer.webkitRequestFullscreen();
+          return;
+        }
+
+        if (typeof videoElement.webkitEnterFullscreen === 'function') {
+          videoElement.webkitEnterFullscreen();
+        }
+      };
+
+      vslPlayButton.addEventListener('click', () => {
+        vslPlayer.innerHTML = `
+          <video controls autoplay playsinline preload="metadata" poster="./img/capa.png" class="h-full m-auto">
+            <source src="./videos/Video.mp4" type="video/mp4">
+            Seu navegador não suporta reprodução de vídeo.
+          </video>
+        `;
+
+        const videoElement = vslPlayer.querySelector('video');
+        requestVideoFullscreen(videoElement);
+      }, { once: true });
+    }
   </script>
 </body>
 </html>
+
+
+
+
